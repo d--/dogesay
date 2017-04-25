@@ -1,0 +1,8 @@
+package doge;
+
+struct say_t
+{
+    int64_t rate;
+    string  voice;
+    string  phrase;
+}
