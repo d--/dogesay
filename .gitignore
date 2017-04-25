@@ -3,3 +3,4 @@ bin/
 *.swp
 .DS_Store
 
+src/doge_say_t.*
