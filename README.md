@@ -5,3 +5,9 @@ OSX as soon as the LCM broadcast packet is received.
 
 Requires LCM
 
+```bash
+pushd src
+lcm-gen -c say.lcm
+popd
+```
+

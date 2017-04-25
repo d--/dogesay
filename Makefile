@@ -10,9 +10,6 @@ build:
 bin:
 	mkdir -p bin
 
-src/doge_say_t.%:
-	lcm-gen -c --c-cpath src --c-hpath src src/say.lcm
-
 bin/pub: src/pub.c build/doge_say_t.o | bin
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ \
 		$(shell pkg-config --cflags --libs lcm)

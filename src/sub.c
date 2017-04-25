@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 #include <lcm/lcm.h>
 
 #include "doge_say_t.h"
@@ -6,10 +7,20 @@
 static void handler(const lcm_recv_buf_t *rbuf, const char *channel,
         const doge_say_t *msg, void *user)
 {
-    printf("message received!\n");
-    printf("rate: %lld\n", msg->rate);
-    printf("voice: %s\n", msg->voice);
-    printf("phrase: %s\n", msg->phrase);
+    char rate[64];
+    snprintf(rate, 64, "%d", msg->rate);
+
+    pid_t pid = fork();
+    if (pid == 0) {
+        execlp("/usr/bin/say",
+                "say",
+                "-v",
+                msg->voice,
+                "-r",
+                rate,
+                msg->phrase,
+                NULL);
+    }
 }
 
 int main(int argc, char **argv)
