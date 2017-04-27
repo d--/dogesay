@@ -10,4 +10,9 @@ pushd src
 lcm-gen -c say.lcm
 popd
 ```
+Alternatively, with Docker
 
+```bash
+docker build -t dogesay .
+docker run --rm -v $PWD:/home/dogesay dogesay /bin/bash -c "cd src && lcm-gen -c say.lcm"
+```
