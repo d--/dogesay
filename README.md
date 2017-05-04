@@ -10,4 +10,8 @@ pushd src
 lcm-gen -c say.lcm
 popd
 ```
+Alternatively, with Docker
 
+```bash
+./scripts/compile_lcm.sh
+```
