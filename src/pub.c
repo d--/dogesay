@@ -19,12 +19,11 @@ int main(int argc, char **argv)
         .phrase = "yeah buddy",
     };
 
+    char *str;
     char buf[1024];
-    fgets(buf, 1024, stdin);
-    while (1) {
-        dogesay.phrase = buf;
+    while ((str = fgets(buf, 1024, stdin)) != NULL) {
+        dogesay.phrase = str;
         doge_say_t_publish(lcm, "DOGESAY", &dogesay);
-        fgets(buf, 1024, stdin);
     }
 
     lcm_destroy(lcm);
