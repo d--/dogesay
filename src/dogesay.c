@@ -22,6 +22,7 @@ static void msg_handler(const lcm_recv_buf_t *rbuf, const char *channel,
     char rate[64];
     snprintf(rate, 64, "%d", msg->rate);
 
+    signal(SIGCHLD, SIG_IGN);
     pid_t pid;
     pid = fork();
     if (pid == 0) {
