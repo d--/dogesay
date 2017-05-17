@@ -14,6 +14,30 @@ void usage(void)
     printf("usage: dogesay [-rvh] '[phrase]'\n");
     printf("    [--rate=num] [--voice=Alex]\n");
     printf("    [--daemon]\n");
+    printf("    [--say-help]\n");
+}
+
+void say_some_help()
+{
+    char *phrase = ""
+    "Hello, welcome to dogesay.  I will be your guide.  This program can run "
+    "in a publishing mode, or a subscribing mode.  When run as a daemon, this "
+    "program will listen for messages published by other dogesay processes and"
+    " then say them based on the other parameters passed in like rate and "
+    "voice.  Please consider the following command line options.  Dash dash "
+    "rate will allow you to make me speak very slowly, or very quickly.  Dash "
+    "dash voice will allow you to, among other things, change my gender. "
+    "Finally, dash dash docs will relay this message, so that you understand "
+    "how this program works.  I hope I've been helpful.  Next, please listen "
+    "to my story.  Chapter 1.  The little doge that could.  One day, in the "
+    "land of doges, there lived a little doge.  To be continued.";
+
+    signal(SIGCHLD, SIG_IGN);
+    pid_t pid;
+    pid = fork();
+    if (pid == 0) {
+        execlp("/usr/bin/say", "say", "-r", "20", phrase, NULL);
+    }
 }
 
 static void msg_handler(const lcm_recv_buf_t *rbuf, const char *channel,
@@ -85,13 +109,14 @@ int main(int argc, char **argv)
         .phrase = "",
     };
 
-    int daemon;
+    int daemon, say_help;
     struct option longopts[] = {
-        { "rate",   required_argument, NULL,    'r' },
-        { "voice",  required_argument, NULL,    'v' },
-        { "daemon", no_argument,       &daemon, 1   },
-        { "help",   no_argument,       NULL,    'h' },
-        { NULL,     0,                 NULL,    0 }
+        { "rate",     required_argument, NULL,      'r' },
+        { "voice",    required_argument, NULL,      'v' },
+        { "daemon",   no_argument,       &daemon,   1   },
+        { "say-help", no_argument,       &say_help, 1   },
+        { "help",     no_argument,       NULL,      'h' },
+        { NULL,       0,                 NULL,      0   }
     };
 
     char ch;
@@ -100,6 +125,10 @@ int main(int argc, char **argv)
         case 0:
             if (daemon) {
                 daemonize();
+                exit(EXIT_SUCCESS);
+            }
+            if (say_help) {
+                say_some_help();
                 exit(EXIT_SUCCESS);
             }
             break;
