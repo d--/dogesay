@@ -1,8 +1,8 @@
-.PHONY: all clean
+.PHONY: all install clean
 
 CFLAGS = -Wall
 
-all: bin/pub bin/sub
+all: bin/dogesay
 
 build:
 	mkdir -p build
@@ -10,11 +10,10 @@ build:
 bin:
 	mkdir -p bin
 
-bin/pub: src/pub.c build/doge_say_t.o | bin
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ \
-		$(shell pkg-config --cflags --libs lcm)
+install: all
+	cp bin/dogesay /usr/local/bin/dogesay
 
-bin/sub: src/sub.c build/doge_say_t.o | bin
+bin/dogesay: src/dogesay.c build/doge_say_t.o | bin
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ \
 		$(shell pkg-config --cflags --libs lcm)
 
