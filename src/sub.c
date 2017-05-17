@@ -14,11 +14,6 @@ static void handler(const lcm_recv_buf_t *rbuf, const char *channel,
     pid_t pid;
     pid = fork();
     if (pid == 0) {
-        execlp("/usr/bin/osascript", "osascript", "-e", "set Volume 3", NULL);
-    }
-
-    pid = fork();
-    if (pid == 0) {
         execlp("/usr/bin/say", "say", "-v", msg->voice, "-r", rate,
                 msg->phrase, NULL);
     }
