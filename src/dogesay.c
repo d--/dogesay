@@ -14,7 +14,7 @@ void usage(void)
     printf("usage: dogesay [-rvh] '[phrase]'\n");
     printf("    [--rate=num] [--voice=Alex]\n");
     printf("    [--daemon]\n");
-    printf("    [--say-help]\n");
+    printf("    [--help]\n");
 }
 
 void say_some_help()
@@ -114,13 +114,12 @@ int main(int argc, char **argv)
         { "rate",     required_argument, NULL,      'r' },
         { "voice",    required_argument, NULL,      'v' },
         { "daemon",   no_argument,       &daemon,   1   },
-        { "say-help", no_argument,       &say_help, 1   },
-        { "help",     no_argument,       NULL,      'h' },
+        { "help",     no_argument,       &say_help, 1   },
         { NULL,       0,                 NULL,      0   }
     };
 
     char ch;
-    while ((ch = getopt_long(argc, argv, "r:v:h", longopts, NULL)) != -1) {
+    while ((ch = getopt_long(argc, argv, "r:v:?", longopts, NULL)) != -1) {
         switch (ch) {
         case 0:
             if (daemon) {
