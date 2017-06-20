@@ -3,13 +3,42 @@
 An attempt at writing a program that will simply shell out and call 'say' on
 OSX as soon as the LCM broadcast packet is received.
 
-Requires LCM
+Take five minutes and do the following...
+
+Install the XCode Command Line Tools
+
+```bash
+xcode-select --install
+```
+
+Install Homebrew
+
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Install pkg-config
+
+```bash
+brew install pkg-config
+```
+
+Install LCM
+
+```bash
+brew install lcm
+```
+
+Generate the message marshalling code
 
 ```bash
 pushd src
 lcm-gen -c say.lcm
 popd
 ```
+
+Or take like a decade and use Docker like a JS loving noob hipster:
+
 Alternatively, with Docker
 
 ```bash
