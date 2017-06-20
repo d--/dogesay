@@ -36,3 +36,10 @@ pushd src
 lcm-gen -c say.lcm
 popd
 ```
+
+Run the magic incantation
+
+```bash
+make
+make install
+```
