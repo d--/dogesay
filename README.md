@@ -36,11 +36,3 @@ pushd src
 lcm-gen -c say.lcm
 popd
 ```
-
-Or take like a decade and use Docker like a JS loving noob hipster:
-
-Alternatively, with Docker
-
-```bash
-./scripts/compile_lcm.sh
-```
