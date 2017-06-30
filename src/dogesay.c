@@ -7,7 +7,7 @@
 
 #include "doge_say_t.h"
 
-#define MULTICAST_LAN "udpm://239.255.76.67:7667?ttl=1"
+#define MULTICAST_LAN "udpm://239.255.76.67:7667?ttl=64"
 
 void usage(void)
 {
@@ -36,7 +36,7 @@ void say_some_help()
     pid_t pid;
     pid = fork();
     if (pid == 0) {
-        execlp("/usr/bin/say", "say", "-r", "20", phrase, NULL);
+        execlp("/usr/bin/say", "say", "-r", "120", phrase, NULL);
     }
 }
 
