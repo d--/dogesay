@@ -7,7 +7,7 @@
 
 #include "doge_say_t.h"
 
-#define MULTICAST_LAN "udpm://239.255.76.67:7667?ttl=64"
+#define MULTICAST_LAN "udpm://239.255.76.67:7667?ttl=1"
 
 void usage(void)
 {
